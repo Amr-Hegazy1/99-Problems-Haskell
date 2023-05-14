@@ -1,9 +1,10 @@
-data NestedList a = Elem a | List [NestedList a]
+data NestedList a = Elem a | List [NestedList a] deriving Show
 
-flatten [] = []
+flatten :: NestedList a -> [a]
 
-flatten x 
+flatten (List []) = []
 
-flatten (x:t) = flatten x ++ flatten t
+flatten  (Elem a)  = [a] 
 
-flatten (x:t) = x ++ flatten t
+flatten  (List (x:xs)) =  flatten (x) ++( flatten (List xs))
+
